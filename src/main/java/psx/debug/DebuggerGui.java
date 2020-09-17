@@ -2657,11 +2657,19 @@ public class DebuggerGui extends JPanel {
 	}
 	
 	public void setPauseAction(ActionListener listener) {
-		btnPause.addActionListener(listener);
+		btnPause.addActionListener(a -> {
+			btnPause.setEnabled(false);
+			btnRun.setEnabled(true);
+			listener.actionPerformed(a);
+		});
 	}
 	
 	public void setRunAction(ActionListener listener) {
-		btnRun.addActionListener(listener);
+		btnRun.addActionListener(a -> {
+			btnPause.setEnabled(true);
+			btnRun.setEnabled(false);
+			listener.actionPerformed(a);
+		});
 	}
 	
 	public void initButtonsState() {
